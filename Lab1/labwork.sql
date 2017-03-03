@@ -107,6 +107,10 @@ AND enrolment.grade = "HD";
 
 -- 11. List all faculties by name, and if the faculty teaches a course
 -- in semester 2, 2016, also list the course id. 
+SELECT faculty.flastname, faculty.ffirstname, courseoffer.cid
+FROM faculty, courseoffer
+WHERE courseoffer.year = 2015
+AND courseoffer.semester = "2";
 
 -- 12. Find all students who received D or HD in every course
 -- he/she enrolled in in semester 2, 2015.
