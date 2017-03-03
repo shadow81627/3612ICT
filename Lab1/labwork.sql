@@ -72,12 +72,18 @@ WHERE enrolment.sid = student.sid
 AND enrolment.cid = "1420ICT"
 AND enrolment.year = 2015
 AND enrolment.semester = "2"
-GROUP BY enrolment.grade
-
+GROUP BY enrolment.grade;
 
 -- 8. Find all students by (ID and name) who enrolled in less than
 -- 2 courses in semester 1, 2016.
-
+SELECT student.sid, student.slastname, student.sfirstname, COUNT(*) AS Courses
+FROM enrolment, student
+WHERE enrolment.sid = student.sid
+AND enrolment.year = 2016
+AND enrolment.semester = "1"
+GROUP BY student.sid
+HAVING COUNT(*) < 2;
+);
 
 -- 9. Find the courses which have an enrolment of less than five
 -- students in semester 1, 2016.
