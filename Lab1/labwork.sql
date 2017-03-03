@@ -87,6 +87,13 @@ HAVING COUNT(*) < 2;
 
 -- 9. Find the courses which have an enrolment of less than five
 -- students in semester 1, 2016.
+SELECT course.cid, COUNT(*) AS NumberOfStudents
+FROM course, enrolment
+WHERE enrolment.cid = course.cid
+AND enrolment.year = 2016
+AND enrolment.semester = "1"
+GROUP BY course.cid
+HAVING COUNT(*) < 5;
 
 -- 10. List the names of those students who received HD in
 -- 1420ICT in semester 2, 2016.
