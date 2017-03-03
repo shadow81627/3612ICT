@@ -52,11 +52,21 @@ WHERE student.sid IN (
 
 -- 6. Find the number of female students enrolled in 2002ICT, in
 -- semester 2, 2016.
-
+SELECT COUNT(*)
+FROM student
+WHERE student.sid IN (
+	SELECT enrolment.sid
+	FROM enrolment
+	WHERE enrolment.cid = "2002ICT"
+	AND enrolment.year = 2016
+	AND enrolment.semester = "1"
+)
+AND student.gender = "F";
 
 
 -- 7. Find the number of students who received F, P, C, D, and HD
 -- respectively in 1420ICT in semester 2, 2016.
+
 
 -- 8. Find all students by (ID and name) who enrolled in less than
 -- 2 courses in semester 1, 2016.
