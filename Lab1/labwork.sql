@@ -23,17 +23,37 @@ FROM student
 WHERE phone IS NULL
 ORDER BY student.slastname ASC;
  
--- Find all courses that are offered in semester 1, 2016 but not
+-- 4. Find all courses that are offered in semester 1, 2016 but not
 -- in semester 2, 2016. 
- 
- SELECT *
- FROM course, courseoffer
- WHERE 
+
+SELECT *
+FROM course, courseoffer
+WHERE courseoffer.year = 2016 
+AND courseoffer.semester = 1;
+
  
 -- 5. Find all students enrolled in 3512ICT in semester 1, 2016.
+SELECT *
+FROM student, enrolment
+WHERE enrolment.sid = student.sid
+AND enrolment.cid = "3612ICT"
+AND enrolment.year = 2016
+AND enrolment.semester = "1";
+
+SELECT * 
+FROM student
+WHERE student.sid IN (
+	SELECT enrolment.sid
+	FROM enrolment
+	WHERE enrolment.cid = "3612ICT"
+	AND enrolment.year = 2016
+	AND enrolment.semester = "1"
+);
 
 -- 6. Find the number of female students enrolled in 2002ICT, in
 -- semester 2, 2016.
+
+
 
 -- 7. Find the number of students who received F, P, C, D, and HD
 -- respectively in 1420ICT in semester 2, 2016.
