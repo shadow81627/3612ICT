@@ -2,8 +2,6 @@
  * 1. Create a database called Lab1, use the database, and create
  * the above tables using the give script file lab1data.sql 
  */
- 
- 
 
 /*
  * 2. Find all courses whose description contains the word
@@ -20,17 +18,17 @@ WHERE course.description LIKE "%database%";
  * last name. 
  */
  
- SELECT studnet.sid, student.slastname, student.sfirstname 
- FROM student 
- WHERE phone = NULL
- ORDER BY student.slastname ASC;
+SELECT student.sid, student.slastname, student.sfirstname 
+FROM student 
+WHERE phone IS NULL
+ORDER BY student.slastname ASC;
  
 -- Find all courses that are offered in semester 1, 2016 but not
 -- in semester 2, 2016. 
  
- SELECT * 
- FROM
- WHERE
+ SELECT *
+ FROM course, courseoffer
+ WHERE 
  
 -- 5. Find all students enrolled in 3512ICT in semester 1, 2016.
 
