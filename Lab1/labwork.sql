@@ -66,10 +66,18 @@ AND student.gender = "F";
 
 -- 7. Find the number of students who received F, P, C, D, and HD
 -- respectively in 1420ICT in semester 2, 2016.
+SELECT COUNT(*) AS NumberofGrades
+FROM enrolment, student
+WHERE enrolment.sid = student.sid
+AND enrolment.cid = "1420ICT"
+AND enrolment.year = 2015
+AND enrolment.semester = "2"
+GROUP BY enrolment.grade
 
 
 -- 8. Find all students by (ID and name) who enrolled in less than
 -- 2 courses in semester 1, 2016.
+
 
 -- 9. Find the courses which have an enrolment of less than five
 -- students in semester 1, 2016.
