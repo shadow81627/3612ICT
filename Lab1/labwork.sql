@@ -97,6 +97,13 @@ HAVING COUNT(*) < 5;
 
 -- 10. List the names of those students who received HD in
 -- 1420ICT in semester 2, 2016.
+SELECT student.sid, student.slastname, student.sfirstname, enrolment.grade
+FROM enrolment, student
+WHERE enrolment.sid = student.sid
+AND enrolment.cid = "1420ICT"
+AND enrolment.year = 2015
+AND enrolment.semester = "2"
+AND enrolment.grade = "HD";
 
 -- 11. List all faculties by name, and if the faculty teaches a course
 -- in semester 2, 2016, also list the course id. 
