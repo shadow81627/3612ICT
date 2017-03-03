@@ -114,13 +114,46 @@ AND courseoffer.semester = "2";
 
 -- 12. Find all students who received D or HD in every course
 -- he/she enrolled in in semester 2, 2015.
+SELECT student.sid, student.slastname, student.sfirstname, enrolment.cid, enrolment.grade
+FROM enrolment, student
+WHERE student.sid IN (
+	SELECT enrolment.sid
+	FROM enrolment
+	WHERE enrolment.year = 2015
+	AND enrolment.semester = "2"
+	
+)
+AND enrolment.grade = "D"
+OR enrolment.grade = "HD"
+GROUP BY student.sid, enrolment.grade;
 
 -- 13. Find all students who enrolled in some courses and received
 -- D or HD in every course he/she enrolled in in semester 2,
 -- 2016.
+SELECT student.sid, student.slastname, student.sfirstname, enrolment.cid, enrolment.grade
+FROM enrolment, student
+WHERE student.sid IN (
+	SELECT enrolment.sid
+	FROM enrolment
+	WHERE enrolment.year = 2016
+	AND enrolment.semester = "2"
+	
+)
+AND enrolment.grade = "D"
+OR enrolment.grade = "HD"
+GROUP BY student.sid, enrolment.grade;
 
 -- 14. Modify the structure of the table student to add an attribute
 -- email.
+ALTER TABLE student
+ADD email char(15);
+SELECT * FROM student;
 
 -- 15. Change the grade to HD for students enrolled in 2002ICT,
 -- semester 1, 2016 and whose grade is D 
+UPDATE enrolment
+SET enrolment.grade="HD"
+WHERE enrolment.cid = "2002ICT"
+AND enrolment.semester = "1"
+AND enrolment.year = 2016
+AND enrolment.grade = "D";
