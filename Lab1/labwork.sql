@@ -10,7 +10,8 @@
  * ‘database’. 
  */
 
-SELECT * FROM course 
+SELECT * 
+FROM course 
 WHERE course.description LIKE "%database%";
 
 /*
@@ -19,8 +20,47 @@ WHERE course.description LIKE "%database%";
  * last name. 
  */
  
- SELECT studnet.sid, student.slastname, student.sfirstname * FROM student 
+ SELECT studnet.sid, student.slastname, student.sfirstname 
+ FROM student 
  WHERE phone = NULL
  ORDER BY student.slastname ASC;
  
+-- Find all courses that are offered in semester 1, 2016 but not
+-- in semester 2, 2016. 
  
+ SELECT * 
+ FROM
+ WHERE
+ 
+-- 5. Find all students enrolled in 3512ICT in semester 1, 2016.
+
+-- 6. Find the number of female students enrolled in 2002ICT, in
+-- semester 2, 2016.
+
+-- 7. Find the number of students who received F, P, C, D, and HD
+-- respectively in 1420ICT in semester 2, 2016.
+
+-- 8. Find all students by (ID and name) who enrolled in less than
+-- 2 courses in semester 1, 2016.
+
+-- 9. Find the courses which have an enrolment of less than five
+-- students in semester 1, 2016.
+
+-- 10. List the names of those students who received HD in
+-- 1420ICT in semester 2, 2016.
+
+-- 11. List all faculties by name, and if the faculty teaches a course
+-- in semester 2, 2016, also list the course id. 
+
+-- 12. Find all students who received D or HD in every course
+-- he/she enrolled in in semester 2, 2015.
+
+-- 13. Find all students who enrolled in some courses and received
+-- D or HD in every course he/she enrolled in in semester 2,
+-- 2016.
+
+-- 14. Modify the structure of the table student to add an attribute
+-- email.
+
+-- 15. Change the grade to HD for students enrolled in 2002ICT,
+-- semester 1, 2016 and whose grade is D 
