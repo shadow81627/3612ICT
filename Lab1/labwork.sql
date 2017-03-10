@@ -122,10 +122,13 @@ WHERE student.sid IN (
 	FROM enrolment
 	WHERE enrolment.year = 2015
 	AND enrolment.semester = "2"
+	AND enrolment.grade = "D"
+	OR enrolment.grade = "HD"
 	
 )
-AND enrolment.grade = "D"
-OR enrolment.grade = "HD"
+AND enrolment.grade != "F"
+AND enrolment.grade != "P"
+AND enrolment.grade != "C"
 GROUP BY student.sid, enrolment.grade;
 
 -- 13. Find all students who enrolled in some courses and received
@@ -138,10 +141,13 @@ WHERE student.sid IN (
 	FROM enrolment
 	WHERE enrolment.year = 2016
 	AND enrolment.semester = "2"
+	AND enrolment.grade = "D"
+	OR enrolment.grade = "HD"
 	
 )
-AND enrolment.grade = "D"
-OR enrolment.grade = "HD"
+AND enrolment.grade != "F"
+AND enrolment.grade != "P"
+AND enrolment.grade != "C"
 GROUP BY student.sid, enrolment.grade;
 
 -- 14. Modify the structure of the table student to add an attribute
