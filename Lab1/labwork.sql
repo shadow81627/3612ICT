@@ -29,7 +29,8 @@ ORDER BY student.slastname ASC;
 SELECT *
 FROM course, courseoffer
 WHERE courseoffer.year = 2016 
-AND courseoffer.semester = 1;
+AND courseoffer.semester = 1
+AND courseoffer.semester != 2;
 
  
 -- 5. Find all students enrolled in 3512ICT in semester 1, 2016.

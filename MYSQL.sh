@@ -14,3 +14,7 @@ mysql-ctl cli
 # User - $C9_USER (Your Cloud9 user name)
 # Password - "" (No password since you can only access the DB from within the workspace)
 # Database - c9 (The database username)
+
+use c9
+source Lab1Schema.sql
+show tables;
