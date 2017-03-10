@@ -7,7 +7,6 @@
  * 2. Find all courses whose description contains the word
  * ‘database’. 
  */
-
 SELECT * 
 FROM course 
 WHERE course.description LIKE "%database%";
@@ -17,7 +16,6 @@ WHERE course.description LIKE "%database%";
  * phone number recorded in the table, in ascending order of
  * last name. 
  */
- 
 SELECT student.sid, student.slastname, student.sfirstname 
 FROM student 
 WHERE phone IS NULL
@@ -53,7 +51,7 @@ WHERE student.sid IN (
 
 -- 6. Find the number of female students enrolled in 2002ICT, in
 -- semester 2, 2016.
-SELECT COUNT(*)
+SELECT COUNT(*) AS 'Number Of Female Students'
 FROM student
 WHERE student.sid IN (
 	SELECT enrolment.sid
@@ -67,7 +65,7 @@ AND student.gender = "F";
 
 -- 7. Find the number of students who received F, P, C, D, and HD
 -- respectively in 1420ICT in semester 2, 2016.
-SELECT COUNT(*) AS NumberofGrades
+SELECT COUNT(*) AS 'Number of Grades'
 FROM enrolment, student
 WHERE enrolment.sid = student.sid
 AND enrolment.cid = "1420ICT"
@@ -84,11 +82,10 @@ AND enrolment.year = 2016
 AND enrolment.semester = "1"
 GROUP BY student.sid
 HAVING COUNT(*) < 2;
-);
 
 -- 9. Find the courses which have an enrolment of less than five
 -- students in semester 1, 2016.
-SELECT course.cid, COUNT(*) AS NumberOfStudents
+SELECT course.cid AS 'Course ID', COUNT(*) AS 'Number of Students'
 FROM course, enrolment
 WHERE enrolment.cid = course.cid
 AND enrolment.year = 2016
@@ -124,7 +121,6 @@ WHERE student.sid IN (
 	AND enrolment.semester = "2"
 	AND enrolment.grade = "D"
 	OR enrolment.grade = "HD"
-	
 )
 AND enrolment.grade != "F"
 AND enrolment.grade != "P"
@@ -143,7 +139,6 @@ WHERE student.sid IN (
 	AND enrolment.semester = "2"
 	AND enrolment.grade = "D"
 	OR enrolment.grade = "HD"
-	
 )
 AND enrolment.grade != "F"
 AND enrolment.grade != "P"
