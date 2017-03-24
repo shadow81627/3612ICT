@@ -31,7 +31,7 @@ create table guest (
        Constraint AK_guest unique(guestName,tel));
 
 
-Create table Booking (
+Create table booking (
        bookingID INT unsigned auto_increment primary key,
        hotelNo tinyint unsigned,
        guestNo smallint unsigned,
