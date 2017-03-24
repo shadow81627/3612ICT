@@ -83,7 +83,7 @@ Create table Booking (
 
  Insert into booking values (null, 1, 1,  '2016-01-01', '2016-01-05', '001');
  Insert into booking values (null, 1, 3,  date_add(curdate(), interval -1 day), date_add(curdate(), interval 3 day), '002');           
- Insert into booking values (null, 2, 1 '2016-02-29', '2016-03-05', '001');
+ Insert into booking values (null, 2, 1, '2016-02-29', '2016-03-05', '001');
  Insert into booking values (null, 4, 3,  date_add(curdate(), interval 2 day), date_add(curdate(), interval 8 day), '005');
  Insert into booking values (null, 3, 4,  '2016-01-03', '2016-01-09', '001');
  Insert into booking values (null, 1, 2,  '2016-01-03', '2016-01-06', '003');
