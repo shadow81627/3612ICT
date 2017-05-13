@@ -5,7 +5,7 @@ use pocketpasta; */
 -- Create Table Statements
 
 -- Create Customer table
-CREATE OR REPLACE TABLE Customer (
+CREATE OR REPLACE TABLE customer (
 	customer_id INT AUTO_INCREMENT, 
 	customer_name VARCHAR(32), 
 	customer_email VARCHAR(255), 
@@ -14,7 +14,7 @@ CREATE OR REPLACE TABLE Customer (
 );
 
 -- Create Supplier table
-CREATE TABLE Supplier (
+CREATE TABLE supplier (
 	supplier_id  INT AUTO_INCREMENT,
 	supplier_name  VARCHAR(32),
 	supplier_image BLOB,
@@ -23,7 +23,7 @@ CREATE TABLE Supplier (
 );
 
 -- Create Item table
-CREATE TABLE Item (
+CREATE TABLE item (
 	item_id INT,
 	item_name  VARCHAR(32),
 	item_description  VARCHAR(255),
@@ -32,15 +32,15 @@ CREATE TABLE Item (
 );
 
 -- Create Material table
-CREATE TABLE Material (
+CREATE TABLE material (
 	material_id INT AUTO_INCREMENT, 
 	supplier_id INT,
 	item_id INT,
-	price INT,
-	unit ENUM('kg', 'box', 'grams', 'each'),
+	material_price INT,
+	material_unit ENUM('kg', 'box', 'grams', 'each'),
 	PRIMARY KEY (material_id),
-	FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
-	FOREIGN KEY (item_id) REFERENCES Item(item_id)
+	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
+	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
 -- Create Order table
