@@ -4,8 +4,10 @@ use pocketpasta; */
 
 -- Create Table Statements
 
+-- Drop Customer table
+DROP TABLE IF EXISTS customer;
 -- Create Customer table
-CREATE OR REPLACE TABLE customer (
+CREATE TABLE customer (
 	customer_id INT AUTO_INCREMENT, 
 	customer_name VARCHAR(32), 
 	customer_email VARCHAR(255), 
@@ -13,8 +15,10 @@ CREATE OR REPLACE TABLE customer (
 	PRIMARY KEY (customer_id)
 );
 
+-- Drop supplier table
+DROP TABLE IF EXISTS supplier;
 -- Create Supplier table
-CREATE OR REPLACE TABLE supplier (
+CREATE TABLE supplier (
 	supplier_id  INT AUTO_INCREMENT,
 	supplier_name  VARCHAR(32),
 	supplier_image BLOB,
@@ -22,8 +26,10 @@ CREATE OR REPLACE TABLE supplier (
 	PRIMARY KEY (supplier_id)
 );
 
+-- Drop Item table
+DROP TABLE IF EXISTS item;
 -- Create Item table
-CREATE OR REPLACE TABLE item (
+CREATE TABLE item (
 	item_id INT,
 	item_name  VARCHAR(32),
 	item_description  VARCHAR(255),
@@ -31,8 +37,10 @@ CREATE OR REPLACE TABLE item (
 	PRIMARY KEY (item_id)
 );
 
+-- Drop material table
+DROP TABLE IF EXISTS material;
 -- Create Material table
-CREATE OR REPLACE TABLE material (
+CREATE TABLE material (
 	material_id INT AUTO_INCREMENT, 
 	supplier_id INT,
 	item_id INT,
@@ -43,8 +51,10 @@ CREATE OR REPLACE TABLE material (
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
+-- Drop product table
+DROP TABLE IF EXISTS product;
 -- Create Product table
-CREATE OR REPLACE TABLE product (
+CREATE TABLE product (
 	product_id  INT AUTO_INCREMENT, 
 	item_id INT,
 	product_price FLOAT,
@@ -53,8 +63,10 @@ CREATE OR REPLACE TABLE product (
 	PRIMARY KEY (product_id)
 );
 
+-- Drop material_order table
+DROP TABLE IF EXISTS material_order;
 -- Create Material_Order table
-CREATE OR REPLACE TABLE material_order (
+CREATE TABLE material_order (
 	material_order_id INT,
 	material_id INT,
 	material_order_quantity FLOAT,
@@ -67,8 +79,10 @@ CREATE OR REPLACE TABLE material_order (
 	FOREIGN KEY (material_id) REFERENCES material(material_id)
 );
 
+-- Drop product_order table
+DROP TABLE IF EXISTS product_order;
 -- Create Product_Order table
-CREATE OR REPLACE TABLE product_order (
+CREATE TABLE product_order (
 	product_order_id INT,
 	material_id INT,
 	customer_id INT,
@@ -83,6 +97,8 @@ CREATE OR REPLACE TABLE product_order (
 	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
+-- Drop inventory table
+DROP TABLE IF EXISTS inventory;
 -- Create Inventory Table
 CREATE TABLE OR REPLACE inventory (
 	inventory_id  INT AUTO_INCREMENT,
@@ -92,6 +108,8 @@ CREATE TABLE OR REPLACE inventory (
 	PRIMARY KEY (inventory_id)
 );
 
+-- Drop stock table
+DROP TABLE IF EXISTS stock;
 -- Create Stock table
 CREATE TABLE OR REPLACE stock (
 	inventory_id INT,
@@ -105,6 +123,8 @@ CREATE TABLE OR REPLACE stock (
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
+-- Drop recipe tale
+DROP TABLE IF EXISTS recipe;
 -- Create Recipe table
 CREATE TABLE OR REPLACE recipe (
 	recipe_id  INT AUTO_INCREMENT,
@@ -113,6 +133,8 @@ CREATE TABLE OR REPLACE recipe (
 	PRIMARY KEY (recipe_id)
 );
 
+-- Drop process table
+DROP TABLE IF EXISTS process;
 -- Create Process table
 CREATE TABLE OR REPLACE process (
 	recipe_id INT,
@@ -123,8 +145,10 @@ CREATE TABLE OR REPLACE process (
 	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id)
 );
 
+-- Drop ingredient table
+DROP TABLE IF EXISTS ingredient;
 -- Create Ingredient table
-CREATE OR REPLACE TABLE ingredient (
+CREATE TABLE ingredient (
 	recipe_id INT,
 	process_id INT,
 	item_id INT,
