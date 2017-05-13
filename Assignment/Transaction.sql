@@ -2,6 +2,16 @@
 DELIMITER $
 
 -- Drop the procedure if it already exists
+DROP PROCEDURE IF EXISTS transfer_stock;
+-- This procedure is used to ensure that the stock is consistant when being updated
+CREATE PROCEDURE transfer_stock(IN inventory INT, IN item INT, IN amount FLOAT)
+BEGIN
+	START TRANSACTION;
+	UPDATE stock SET stock_quantity = stock_quantity + amount WHERE inventory_id = inventory AND item_id = item;
+	COMMIT;
+END
+
+-- Drop the procedure if it already exists
 DROP PROCEDURE IF EXISTS delivery_date;
 
 -- Create a procedure to get the recipes that make an item
