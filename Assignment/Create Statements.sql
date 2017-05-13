@@ -2,32 +2,15 @@
 create database pocketpasta;
 use pocketpasta; */
 
--- Drop tables if they exist
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Friend;
-DROP TABLE IF EXISTS Supplier;
-DROP TABLE IF EXISTS Supplier_User;
-DROP TABLE IF EXISTS Item;
-DROP TABLE IF EXISTS Material;
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS Order_Material;
-DROP TABLE IF EXISTS User_Order;
-DROP TABLE IF EXISTS Inventory;
-DROP TABLE IF EXISTS Inventory_User;
-DROP TABLE IF EXISTS Stock;
-DROP TABLE IF EXISTS Recipe;
-DROP TABLE IF EXISTS Process;
-DROP TABLE IF EXISTS Ingredient;
-
 -- Create Table Statements
 
--- Create User table
-CREATE TABLE Users (
-	user_id INT AUTO_INCREMENT, 
-	username VARCHAR(32), 
-	password VARCHAR(255), 
-	email VARCHAR(255), 
-	PRIMARY KEY (user_id)
+-- Create Customer table
+CREATE OR REPLACE TABLE Customer (
+	customer_id INT AUTO_INCREMENT, 
+	customer_name VARCHAR(32), 
+	customer_email VARCHAR(255), 
+	customer_address VARCHAR(255), 
+	PRIMARY KEY (customer_id)
 );
 
 -- Create Friend table
