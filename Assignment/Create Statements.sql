@@ -25,9 +25,9 @@ CREATE TABLE Supplier (
 -- Create Item table
 CREATE TABLE Item (
 	item_id INT,
-	name  VARCHAR(32),
-	description  VARCHAR(255),
-	Image BLOB,
+	item_name  VARCHAR(32),
+	item_description  VARCHAR(255),
+	item_image BLOB,
 	PRIMARY KEY (item_id)
 );
 
