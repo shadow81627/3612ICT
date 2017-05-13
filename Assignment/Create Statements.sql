@@ -94,30 +94,31 @@ CREATE TABLE OR REPLACE stock (
 );
 
 -- Create Recipe table
-CREATE TABLE Recipe (
+CREATE TABLE OR REPLACE recipe (
 	recipe_id  INT AUTO_INCREMENT,
-	quantity FLOAT,
-	unit ENUM('kg', 'box', 'grams'),
+	recipe_quantity FLOAT,
+	recipe_unit ENUM('kg', 'box', 'grams'),
 	PRIMARY KEY (recipe_id)
 );
 
 -- Create Process table
-CREATE TABLE Process (
-	process_id  INT AUTO_INCREMENT,
-	name VARCHAR(32),
-	description VARCHAR(255),
+CREATE TABLE OR REPLACE process (
 	recipe_id INT,
-	FOREIGN KEY (recipe_id) REFERENCES Recipe(recipe_id),
-	PRIMARY KEY (process_id)
+	process_id  INT,
+	process_name VARCHAR(32),
+	process_description VARCHAR(255),
+	PRIMARY KEY (recipe_id, process_id),
+	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id)
 );
 
 -- Create Ingredient table
-CREATE TABLE Ingredient (
+	recipe_id INT,
 	process_id INT,
 	item_id INT,
-	quantity FLOAT,
-	unit ENUM('kg', 'box', 'grams'),
-	PRIMARY KEY (process_id, item_id),
-	FOREIGN KEY (process_id) REFERENCES Process(process_id),
-	FOREIGN KEY (item_id) REFERENCES Item(item_id)
+	ingredient_quantity FLOAT,
+	ingredient_unit ENUM('kg', 'box', 'grams'),
+	PRIMARY KEY (recipe_id, process_id, item_id),
+	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id),
+	FOREIGN KEY (process_id) REFERENCES process(process_id),
+	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
