@@ -1,6 +1,6 @@
-/*drop database pocketpasta;
+drop database pocketpasta;
 create database pocketpasta;
-use pocketpasta; */
+use pocketpasta; 
 
 -- Create Table Statements
 
@@ -60,7 +60,8 @@ CREATE TABLE product (
 	product_price FLOAT,
 	product_unit ENUM('kg', 'box', 'grams'),	
 	delivery_address VARCHAR(255),
-	PRIMARY KEY (product_id)
+	PRIMARY KEY (product_id),
+	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
 -- Drop material_order table
@@ -84,7 +85,7 @@ DROP TABLE IF EXISTS product_order;
 -- Create Product_Order table
 CREATE TABLE product_order (
 	product_order_id INT,
-	material_id INT,
+	product_id INT,
 	customer_id INT,
 	product_order_quantity FLOAT,
 	product_order_unit ENUM('kg', 'box', 'grams', 'each'),
@@ -93,7 +94,7 @@ CREATE TABLE product_order (
 	product_order_date_created DATETIME NOT NULL DEFAULT NOW(),
 	product_order_date_delivered DATETIME,
 	PRIMARY KEY (product_order_id),
-	FOREIGN KEY (material_id) REFERENCES material(material_id),
+	FOREIGN KEY (product_id) REFERENCES product(product_id),
 	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
@@ -128,9 +129,11 @@ DROP TABLE IF EXISTS recipe;
 -- Create Recipe table
 CREATE TABLE recipe (
 	recipe_id  INT AUTO_INCREMENT,
+	item_id INT,
 	recipe_quantity FLOAT,
 	recipe_unit ENUM('kg', 'box', 'grams'),
-	PRIMARY KEY (recipe_id)
+	PRIMARY KEY (recipe_id),
+	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
 -- Drop process table
@@ -138,10 +141,10 @@ DROP TABLE IF EXISTS process;
 -- Create Process table
 CREATE TABLE process (
 	recipe_id INT,
-	process_id  INT,
+	process_id  INT AUTO_INCREMENT,
 	process_name VARCHAR(32),
 	process_description VARCHAR(255),
-	PRIMARY KEY (recipe_id, process_id),
+	PRIMARY KEY (process_id),
 	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id)
 );
 
@@ -149,13 +152,11 @@ CREATE TABLE process (
 DROP TABLE IF EXISTS ingredient;
 -- Create Ingredient table
 CREATE TABLE ingredient (
-	recipe_id INT,
 	process_id INT,
 	item_id INT,
 	ingredient_quantity FLOAT,
 	ingredient_unit ENUM('kg', 'box', 'grams'),
-	PRIMARY KEY (recipe_id, process_id, item_id),
-	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id),
+	PRIMARY KEY (process_id, item_id),
 	FOREIGN KEY (process_id) REFERENCES process(process_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
