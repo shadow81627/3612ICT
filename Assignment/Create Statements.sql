@@ -43,34 +43,44 @@ CREATE OR REPLACE TABLE material (
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
--- Create Order table
-CREATE TABLE Orders (
-	order_id  INT AUTO_INCREMENT, 
-	due_date DATETIME NOT NULL DEFAULT NOW(),
-	date_created DATETIME NOT NULL DEFAULT NOW(),
+-- Create Product table
+CREATE OR REPLACE TABLE product (
+	product_id  INT AUTO_INCREMENT, 
+	item_id INT,
+	product_price FLOAT,
+	product_unit ENUM('kg', 'box', 'grams'),	
 	delivery_address VARCHAR(255),
-	PRIMARY KEY (order_id)
+	PRIMARY KEY (product_id)
 );
 
--- Create Order_Material table
-CREATE TABLE Order_Material (
-	order_id INT,
+-- Create Material_Order table
+CREATE OR REPLACE TABLE material_order (
+	material_order_id INT,
 	material_id INT,
-	quantity FLOAT,
-	unit ENUM('kg', 'box', 'grams', 'each'),
-	PRIMARY KEY (order_id, material_id),
-	FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-	FOREIGN KEY (material_id) REFERENCES Material(material_id)
+	material_order_quantity FLOAT,
+	material_order_unit ENUM('kg', 'box', 'grams', 'each'),
+	material_order_address VARCHAR(255),
+	material_order_date_due DATETIME NOT NULL DEFAULT NOW(),
+	material_order_date_created DATETIME NOT NULL DEFAULT NOW(),
+	material_order_date_delivered DATETIME,
+	PRIMARY KEY (material_order_id),
+	FOREIGN KEY (material_id) REFERENCES material(material_id)
 );
 
--- Create User_Order table
-CREATE TABLE User_Order (
-	order_id INT,
-	user_id INT,
-	permisson ENUM('owner', 'editor', 'viewer'),
-	PRIMARY KEY (order_id, user_id),
-	FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-	FOREIGN KEY (user_id) REFERENCES Users(user_id)
+-- Create Product_Order table
+CREATE OR REPLACE TABLE product_order (
+	product_order_id INT,
+	material_id INT,
+	customer_id INT,
+	product_order_quantity FLOAT,
+	product_order_unit ENUM('kg', 'box', 'grams', 'each'),
+	product_order_address VARCHAR(255),
+	product_order_date_due DATETIME NOT NULL DEFAULT NOW(),
+	product_order_date_created DATETIME NOT NULL DEFAULT NOW(),
+	product_order_date_delivered DATETIME,
+	PRIMARY KEY (product_order_id),
+	FOREIGN KEY (material_id) REFERENCES material(material_id),
+	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
 -- Create Inventory Table
@@ -88,6 +98,8 @@ CREATE TABLE OR REPLACE stock (
 	item_id INT,
 	stock_quantity FLOAT,
 	stock_unit ENUM('kg', 'box', 'grams'),
+	stock_min FLOAT,
+	stock_max FLOAT,
 	PRIMARY KEY (inventory_id, item_id),
 	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
@@ -112,6 +124,7 @@ CREATE TABLE OR REPLACE process (
 );
 
 -- Create Ingredient table
+CREATE OR REPLACE TABLE ingredient (
 	recipe_id INT,
 	process_id INT,
 	item_id INT,
