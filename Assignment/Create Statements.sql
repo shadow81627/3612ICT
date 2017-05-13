@@ -13,33 +13,13 @@ CREATE OR REPLACE TABLE Customer (
 	PRIMARY KEY (customer_id)
 );
 
--- Create Friend table
-CREATE TABLE Friend (
-	user_id INT,
-	friend_id INT,
-	date_created DATETIME NOT NULL DEFAULT NOW(),
-	PRIMARY KEY (user_id, friend_id),
-	FOREIGN KEY (user_id) REFERENCES Users(user_id),
-	FOREIGN KEY (friend_id) REFERENCES Users(user_id)  
-);
-
 -- Create Supplier table
 CREATE TABLE Supplier (
 	supplier_id  INT AUTO_INCREMENT,
-	name  VARCHAR(32),
-	Image BLOB,
-	ABN INT,
+	supplier_name  VARCHAR(32),
+	supplier_image BLOB,
+	supplier_ABN INT,
 	PRIMARY KEY (supplier_id)
-);
-
--- Create Supplier_User table
-CREATE TABLE Supplier_User (
-	supplier_id INT,
-	user_id INT,
-	permisson ENUM('owner', 'editor', 'viewer'),
-	PRIMARY KEY (supplier_id, user_id),
-	FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
-	FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 -- Create Item table
