@@ -14,7 +14,7 @@ CREATE OR REPLACE TABLE customer (
 );
 
 -- Create Supplier table
-CREATE TABLE supplier (
+CREATE OR REPLACE TABLE supplier (
 	supplier_id  INT AUTO_INCREMENT,
 	supplier_name  VARCHAR(32),
 	supplier_image BLOB,
@@ -23,7 +23,7 @@ CREATE TABLE supplier (
 );
 
 -- Create Item table
-CREATE TABLE item (
+CREATE OR REPLACE TABLE item (
 	item_id INT,
 	item_name  VARCHAR(32),
 	item_description  VARCHAR(255),
@@ -32,7 +32,7 @@ CREATE TABLE item (
 );
 
 -- Create Material table
-CREATE TABLE material (
+CREATE OR REPLACE TABLE material (
 	material_id INT AUTO_INCREMENT, 
 	supplier_id INT,
 	item_id INT,
@@ -74,7 +74,7 @@ CREATE TABLE User_Order (
 );
 
 -- Create Inventory Table
-CREATE TABLE inventory (
+CREATE TABLE OR REPLACE inventory (
 	inventory_id  INT AUTO_INCREMENT,
 	inventory_name VARCHAR(32),
 	ineventory_description VARCHAR(255),
@@ -82,25 +82,15 @@ CREATE TABLE inventory (
 	PRIMARY KEY (inventory_id)
 );
 
--- Create Inventory_User Table
-CREATE TABLE Inventory_User (
-	inventory_id INT,
-	user_id INT,
-	permisson ENUM('owner', 'editor', 'viewer'),
-	PRIMARY KEY (inventory_id, user_id),
-	FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id),
-	FOREIGN KEY (user_id) REFERENCES Users(user_id)
-);
-
 -- Create Stock table
-CREATE TABLE Stock (
+CREATE TABLE OR REPLACE stock (
 	inventory_id INT,
 	item_id INT,
-	quantity FLOAT,
-	unit ENUM('kg', 'box', 'grams'),
+	stock_quantity FLOAT,
+	stock_unit ENUM('kg', 'box', 'grams'),
 	PRIMARY KEY (inventory_id, item_id),
-	FOREIGN KEY (inventory_id) REFERENCES Inventory(inventory_id),
-	FOREIGN KEY (item_id) REFERENCES Item(item_id)
+	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),
+	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
 -- Create Recipe table
