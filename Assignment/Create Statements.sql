@@ -100,7 +100,7 @@ CREATE TABLE product_order (
 -- Drop inventory table
 DROP TABLE IF EXISTS inventory;
 -- Create Inventory Table
-CREATE TABLE OR REPLACE inventory (
+CREATE TABLE inventory (
 	inventory_id  INT AUTO_INCREMENT,
 	inventory_name VARCHAR(32),
 	ineventory_description VARCHAR(255),
@@ -111,7 +111,7 @@ CREATE TABLE OR REPLACE inventory (
 -- Drop stock table
 DROP TABLE IF EXISTS stock;
 -- Create Stock table
-CREATE TABLE OR REPLACE stock (
+CREATE TABLE stock (
 	inventory_id INT,
 	item_id INT,
 	stock_quantity FLOAT,
@@ -126,7 +126,7 @@ CREATE TABLE OR REPLACE stock (
 -- Drop recipe tale
 DROP TABLE IF EXISTS recipe;
 -- Create Recipe table
-CREATE TABLE OR REPLACE recipe (
+CREATE TABLE recipe (
 	recipe_id  INT AUTO_INCREMENT,
 	recipe_quantity FLOAT,
 	recipe_unit ENUM('kg', 'box', 'grams'),
@@ -136,7 +136,7 @@ CREATE TABLE OR REPLACE recipe (
 -- Drop process table
 DROP TABLE IF EXISTS process;
 -- Create Process table
-CREATE TABLE OR REPLACE process (
+CREATE TABLE process (
 	recipe_id INT,
 	process_id  INT,
 	process_name VARCHAR(32),
