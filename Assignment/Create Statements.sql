@@ -74,12 +74,11 @@ CREATE TABLE User_Order (
 );
 
 -- Create Inventory Table
-CREATE TABLE Inventory (
+CREATE TABLE inventory (
 	inventory_id  INT AUTO_INCREMENT,
-	name VARCHAR(32),
-	description VARCHAR(255),
-	latitude FLOAT( 10, 6 ),
-	longitude FLOAT( 10, 6 ),
+	inventory_name VARCHAR(32),
+	ineventory_description VARCHAR(255),
+	inventory_address VARCHAR(255),
 	PRIMARY KEY (inventory_id)
 );
 
