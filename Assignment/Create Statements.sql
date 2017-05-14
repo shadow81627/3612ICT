@@ -37,47 +37,19 @@ CREATE TABLE item (
 	PRIMARY KEY (item_id)
 );
 
--- Drop material table
-DROP TABLE IF EXISTS material;
--- Create Material table
-CREATE TABLE material (
-	material_id INT AUTO_INCREMENT, 
-	supplier_id INT,
-	item_id INT,
-	material_price INT,
-	material_unit ENUM('kg', 'box', 'grams', 'each'),
-	PRIMARY KEY (material_id),
-	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
-	FOREIGN KEY (item_id) REFERENCES item(item_id)
-);
-
 -- Drop product table
 DROP TABLE IF EXISTS product;
 -- Create Product table
 CREATE TABLE product (
-	product_id  INT AUTO_INCREMENT, 
+	product_id  INT AUTO_INCREMENT,
+	supplier_id INT,
 	item_id INT,
 	product_price FLOAT,
 	product_unit ENUM('kg', 'box', 'grams'),	
 	delivery_address VARCHAR(255),
 	PRIMARY KEY (product_id),
+	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
-);
-
--- Drop material_order table
-DROP TABLE IF EXISTS material_order;
--- Create Material_Order table
-CREATE TABLE material_order (
-	material_order_id INT,
-	material_id INT,
-	material_order_quantity FLOAT,
-	material_order_unit ENUM('kg', 'box', 'grams', 'each'),
-	material_order_address VARCHAR(255),
-	material_order_date_due DATETIME NOT NULL DEFAULT NOW(),
-	material_order_date_created DATETIME NOT NULL DEFAULT NOW(),
-	material_order_date_delivered DATETIME,
-	PRIMARY KEY (material_order_id),
-	FOREIGN KEY (material_id) REFERENCES material(material_id)
 );
 
 -- Drop product_order table
