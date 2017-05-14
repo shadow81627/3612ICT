@@ -1,6 +1,6 @@
-/*drop database pocketpasta;
+drop database pocketpasta;
 create database pocketpasta;
-use pocketpasta; */
+use pocketpasta; 
 
 -- Create Table Statements
 
@@ -75,10 +75,12 @@ DROP TABLE IF EXISTS inventory;
 -- Create Inventory Table
 CREATE TABLE inventory (
 	inventory_id  INT AUTO_INCREMENT,
+	supplier_id INT,
 	inventory_name VARCHAR(32),
 	ineventory_description VARCHAR(255),
 	inventory_address VARCHAR(255),
-	PRIMARY KEY (inventory_id)
+	PRIMARY KEY (inventory_id),
+	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
 );
 
 -- Drop stock table
