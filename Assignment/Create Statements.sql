@@ -91,7 +91,7 @@ CREATE TABLE product_order (
 	product_order_unit ENUM('kg', 'box', 'grams', 'each'),
 	product_order_address VARCHAR(255),
 	product_order_date_due DATETIME NOT NULL DEFAULT NOW(),
-	product_order_date_created DATETIME NOT NULL DEFAULT NOW(),
+	product_order_date_created TIMESTAMP NOT NULL DEFAULT NOW(),
 	product_order_date_delivered DATETIME,
 	PRIMARY KEY (product_order_id),
 	FOREIGN KEY (product_id) REFERENCES product(product_id),
@@ -113,13 +113,15 @@ CREATE TABLE inventory (
 DROP TABLE IF EXISTS stock;
 -- Create Stock table
 CREATE TABLE stock (
+	stock_id INT,
 	inventory_id INT,
 	item_id INT,
 	stock_quantity FLOAT,
 	stock_unit ENUM('kg', 'box', 'grams'),
 	stock_min FLOAT,
 	stock_max FLOAT,
-	PRIMARY KEY (inventory_id, item_id),
+	stock_created TIMESTAMP NOT NULL DEFAULT NOW(),
+	PRIMARY KEY (stock_id),
 	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
