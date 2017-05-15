@@ -100,7 +100,7 @@ CREATE TABLE stock (
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
 
--- Drop recipe tale
+-- Drop recipe table
 DROP TABLE IF EXISTS recipe;
 -- Create Recipe table
 CREATE TABLE recipe (
