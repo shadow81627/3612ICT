@@ -73,7 +73,7 @@ CREATE TABLE product_order (
 DROP TABLE IF EXISTS inventory;
 -- Create Inventory Table
 CREATE TABLE inventory (
-	inventory_id  INT AUTO_INCREMENT,
+	inventory_id INT AUTO_INCREMENT,
 	supplier_id INT,
 	inventory_name VARCHAR(32),
 	inventory_description VARCHAR(255),
@@ -118,6 +118,7 @@ CREATE TABLE process (
 	process_precedence INT,
 	process_name VARCHAR(32),
 	process_description VARCHAR(255),
+	process_image BLOB,
 	PRIMARY KEY (process_id),
 	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id)
 );
