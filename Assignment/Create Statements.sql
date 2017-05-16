@@ -61,7 +61,7 @@ CREATE TABLE product_order (
 	product_order_quantity FLOAT,
 	product_order_unit ENUM('kg', 'box', 'grams', 'each'),
 	product_order_address VARCHAR(255),
-	product_order_date_due DATETIME NOT NULL DEFAULT NOW(),
+	product_order_date_due DATETIME DEFAULT NOW(),
 	product_order_date_created TIMESTAMP NOT NULL DEFAULT NOW(),
 	product_order_date_delivered DATETIME,
 	PRIMARY KEY (product_order_id),
