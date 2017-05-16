@@ -46,7 +46,6 @@ CREATE TABLE product (
 	item_id INT,
 	product_price FLOAT,
 	product_unit ENUM('kg', 'box', 'grams'),	
-	delivery_address VARCHAR(255),
 	PRIMARY KEY (product_id),
 	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
