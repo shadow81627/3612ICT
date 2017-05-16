@@ -137,42 +137,42 @@ WHERE inventory_id = 1;
 
 -- Stock
 
+-- Supplier add a new stock
+INSERT INTO stock 
+VALUES(null, 1, 1, 3, "kg", null);
+
 -- View all stock for a particular inventory
 SELECT * 
 FROM stock
 WHERE invenetory_id = 1;
 
--- Supplier add a new stock
-INSERT INTO stock 
-VALUES(null, 1, 1, 3, "kg", null);
-
--- Supplier update an stock
+-- Supplier update the quantity of a stocked item
 UPDATE stock 
-SET item_id = given_item_id, inventory_id = given_inventory_id, stock_quantity = given_stock_quantity, stock_unit = given_stock_unit, stock_min = given_stock_min, stock_max = given_stock_max
-WHERE stock_id = given_stock_id;
+SET stock_quantity = 7, stock_unit = "gram"
+WHERE stock_id = 1;
 
 -- Supplier delete stock
 DELETE FROM stock 
-WHERE stock_id = given_stock_id;
+WHERE stock_id = 1;
 
 -- Recipe
+
+-- Supplier add a new recipe
+INSERT INTO recipe 
+VALUES(null, 1, 3, "kg");
 
 -- View all recipes
 SELECT * 
 FROM recipe;
 
--- Supplier add a new recipe
-INSERT INTO recipe 
-VALUES(null, item_id, quantity, unit);
-
--- Supplier Update an recipe
+-- Supplier Update a recipe
 UPDATE recipe 
-SET item_id = given_item_id, recipe_quantity = given_recipe_quantity, recipe_unit = given_recipe_unit 
-WHERE recipe_id = given_recipe_id;
+SET recipe_quantity = 4, recipe_unit = "grams" 
+WHERE recipe_id = 1;
 
 -- Supplier delete recipe
 DELETE FROM recipe 
-WHERE recipe_id = given_recipe_id;
+WHERE recipe_id = 1;
 
 -- Process 
 
@@ -182,32 +182,32 @@ FROM process;
 
 -- Supplier add a new process
 INSERT INTO process 
-VALUES(null, recipe_id, process_precedence, process_name, process_description, process_image);
+VALUES(null, 1, 1, "Add pasta", "Add pasta to the boiling water", null);
 
 -- Supplier Update an process
 UPDATE process 
-SET recipe_id = given_recipe_id, process_precedence = given_process_precedence, process_name = given_process_name, process_description = given_process_description, process_image = given_process_image 
-WHERE process_id = given_process_id;
+SET recipe_id = 1, process_precedence = 2, process_name = "Add pizza", process_description = "pour pizza onto your plate", process_image = null 
+WHERE process_id = 1;
 
 -- Supplier delete process
 DELETE FROM process 
-WHERE process_id = given_process_id;
+WHERE process_id = 1;
 
 -- Ingredient 
+
+-- Supplier add a new ingredient
+INSERT INTO ingredient 
+VALUES(1, 1, 3, "kg");
 
 -- View all ingredients
 SELECT * 
 FROM ingredient;
 
--- Supplier add a new ingredient
-INSERT INTO ingredient 
-VALUES(item_id, process_id, ingredient_quantity, ingredient_unit);
-
 -- Supplier Update an ingredient
 UPDATE ingredient 
-SET ingredient_quantity = given_ingredient_quantity, ingredient_unit = given_ingredient_unit 
-WHERE ingredient_id = given_ingredient_id;
+SET ingredient_quantity = 4, ingredient_unit = "grams" 
+WHERE ingredient_id = 1;
 
 -- Supplier delete ingredient
 DELETE FROM ingredient 
-WHERE ingredient_id = given_ingredient_id;
+WHERE ingredient_id = 1;
