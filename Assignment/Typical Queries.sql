@@ -154,13 +154,32 @@ FROM process;
 
 -- Supplier add a new process
 INSERT INTO process 
-VALUES(null, item_id, quantity, unit);
+VALUES(null, recipe_id, process_precedence, process_name, process_description, process_image);
 
 -- Supplier Update an process
 UPDATE process 
-SET item_id = given_item_id, process_quantity = given_process_quantity, process_unit = given_process_unit 
+SET recipe_id = given_recipe_id, process_precedence = given_process_precedence, process_name = given_process_name, process_description = given_process_description, process_image = given_process_image 
 WHERE process_id = given_process_id;
 
 -- Supplier delete process
 DELETE FROM process 
 WHERE process_id = given_process_id;
+
+-- Ingredient 
+
+-- View all ingredients
+SELECT * 
+FROM ingredient;
+
+-- Supplier add a new ingredient
+INSERT INTO ingredient 
+VALUES(item_id, process_id, ingredient_quantity, ingredient_unit);
+
+-- Supplier Update an ingredient
+UPDATE ingredient 
+SET ingredient_quantity = given_ingredient_quantity, ingredient_unit = given_ingredient_unit 
+WHERE ingredient_id = given_ingredient_id;
+
+-- Supplier delete ingredient
+DELETE FROM ingredient 
+WHERE ingredient_id = given_ingredient_id;
