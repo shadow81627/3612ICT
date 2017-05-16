@@ -64,9 +64,19 @@ SELECT *
 FROM product 
 WHERE supplier_id = given_supplier_id;
 
+-- View all products for a particular item
+SELECT * 
+FROM product
+WHERE item_id = given_item_id;
+
 -- Supplier Creates new product
 INSERT INTO product 
 VALUES(null, supplier_id, item_id, product_price, product_unit);
+
+-- Supplier update product
+UPDATE product 
+SET item_id given_item_id, given_product_price, given_product_unit
+WHERE product_id = given_product_id;
 
 -- Item
 
