@@ -91,8 +91,6 @@ CREATE TABLE stock (
 	item_id INT,
 	stock_quantity FLOAT,
 	stock_unit ENUM('kg', 'box', 'grams'),
-	stock_min FLOAT,
-	stock_max FLOAT,
 	stock_created TIMESTAMP NOT NULL DEFAULT NOW(),
 	PRIMARY KEY (stock_id),
 	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),

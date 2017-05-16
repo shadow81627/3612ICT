@@ -2,58 +2,69 @@
 
 -- Customer
 
--- Customer create
+-- Customer create 
 INSERT INTO customer 
-VALUES(null, customer_name, customer_email, customer_address);
-
--- Customer updates thier contact infomation
-UPDATE customer 
-SET customer_name = new_customer_name, customer_email = new_customer_email, customer_address = new_customer_address
-WHERE customer_id = given_customer_id;
+VALUES(null, "Ben", "ben@gmail.com", "21 Fake street");
 
 -- Customer views own details
 SELECT * 
 FROM customer 
-WHERE customer_id = given_customer_id;
+WHERE customer_id = 1;
 
--- Product Order
+-- Customer updates thier contact infomation
+UPDATE customer 
+SET customer_name = "Harry", customer_email = "harry@gmail.com", customer_address = "22 Fake street"
+WHERE customer_id = 1;
 
--- Customer creates order
-INSERT INTO product_order 
-VALUES( null, product_id, customer_id, product_order_quantity, product_order_unit, product_order_address, product_order_due_date, null, null);
+-- Item
 
--- Customer update order 
-UPDATE product_order 
-SET product_order_quantity = given_product_order_quantity, product_order_unit = given_product_order_unit, product_order_address = given_product_order_address, product_order_due_date = given_product_order_due_date, product_order_date_delivered
-WHERE product_order_id = given_product_order_id;
+-- Supplier add a new item
+INSERT INTO item 
+VALUES(null, "pasta", "great original italian pasta", null);
 
--- Customer cancel order
-DELETE FROM product_order 
-WHERE product_order_id = given_product_order_id;
-
--- View a particular customers orders
+-- View all items
 SELECT * 
-FROM product_order, customer
-WHERE customer_id = given_customer_id;
+FROM item;
 
--- Supplier views thier orders and the customer contact detials for each order
+-- View a particular item
 SELECT * 
-FROM product_order, customer 
-WHERE supplier_id = given_supplier_id 
-AND product_order.customer_id = customer.customer_id;
+FROM item 
+WHERE item_id = 1;
+
+-- Supplier Update an item
+UPDATE item 
+SET item_name = "pizza", item_description = "great original italian pasta", item_image = null 
+WHERE item_id = 1;
+
+-- Supplier delete item
+DELETE FROM item 
+WHERE item_id = 1;
 
 -- Supplier
 
 -- Supplier create 
 INSERT INTO supplier 
-VALUES(null, supplier_name, supplier_image, supplier_ABN);
+VALUES(null, "coles", null, 1234);
+
+-- View all Suppliers
+SELECT * 
+FROM supplier;
+
+-- View a particular supplier
+SELECT * 
+FROM supplier
+WHERE supplier_id = 1;
 
 -- Supplier update details
 UPDATE supplier
-SET supplier_name = given_supplier_name, supplier_image = given_supplier_image, supplier_ABN = given_supplier_ABN
-WHERE supplier_id = given_supplier_id;
+SET supplier_name = "Coles", supplier_image = null, supplier_ABN = 12345
+WHERE supplier_id = 1;
 
 -- Product
+
+-- Supplier Creates new product
+INSERT INTO product 
+VALUES(null, 1, 1, 3.20, "kg");
 
 -- View all product
 SELECT * 
@@ -62,71 +73,78 @@ FROM product;
 -- View the products offered by a particular supplier
 SELECT * 
 FROM product 
-WHERE supplier_id = given_supplier_id;
+WHERE supplier_id = 1;
 
 -- View all products for a particular item
 SELECT * 
 FROM product
-WHERE item_id = given_item_id;
-
--- Supplier Creates new product
-INSERT INTO product 
-VALUES(null, supplier_id, item_id, product_price, product_unit);
+WHERE item_id = 1;
 
 -- Supplier update product
 UPDATE product 
-SET item_id given_item_id, given_product_price, given_product_unit
-WHERE product_id = given_product_id;
+SET product_price = 4.20, product_unit = "box"
+WHERE product_id = 1;
 
--- Item
+-- Supplier delete product
+DELETE FROM product
+WHERE product_id = 1;
 
--- View all items
+-- Product Order
+
+-- Customer creates order
+INSERT INTO product_order 
+VALUES( null, 1, 1, 3, "kg", "21 Fake street", null, null, null);
+
+-- View a particular customers orders
 SELECT * 
-FROM item;
+FROM product_order
+WHERE customer_id = 1;
 
--- Supplier add a new item
-INSERT INTO item 
-VALUES(null, name, description, image);
+-- Supplier views thier orders and the customer contact detials for each order
+SELECT * 
+FROM product_order, customer 
+WHERE supplier_id = 1 
+AND product_order.customer_id = customer.customer_id;
 
--- Supplier Update an item
-UPDATE item 
-SET item_name = given_item_name, item_description = given_item_description, item_image = given_item_image 
-WHERE item_id = given_item_id;
+-- Customer update order 
+UPDATE product_order 
+SET product_order_quantity = 4.2, product_order_unit = "grams", product_order_address = "22 Fake strret", product_order_due_date = NOW(), NOW()
+WHERE product_order_id = 1;
 
--- Supplier delete item
-DELETE FROM item 
-WHERE item_id = given_item_id;
+-- Customer cancel order
+DELETE FROM product_order 
+WHERE product_order_id = 1;
 
 -- Inventory
 
 -- View all inventories for a particular supplier
 SELECT * 
 FROM inventory
-WHERE supplier_id = given_supplier_id;
+WHERE supplier_id = 1;
 
 -- Supplier add a new inventory
 INSERT INTO inventory 
-VALUES(null, name, description, address);
+VALUES(null, "fridge", "the cold room out back", "23 Fake street");
 
 -- Supplier update an inventory
 UPDATE inventory 
-SET inventory_name = given_inventory_name, inventory_description = given_inventory_description, inventory_address = given_inventory_address 
-WHERE inventory_id = given_inventory_id;
+SET inventory_name = "pantry", inventory_description = "The cupboard in the kitchen", inventory_address = "21 Fake street" 
+WHERE inventory_id = 1;
 
 -- Supplier delete inventory
 DELETE FROM inventory 
-WHERE inventory_id = given_inventory_id;
+WHERE inventory_id = 1;
 
 -- Stock
 
 -- View all stock for a particular inventory
 SELECT * 
 FROM stock
-WHERE invenetory_id = given_inventory_id;
+WHERE invenetory_id = 1;
 
 -- Supplier add a new stock
 INSERT INTO stock 
-VALUES(null, item_id, inventory_id, stock_quantity, stock_unit, stock_min, stock_max, null);
+VALUES(null, 1, 1, 3, "kg", null);
 
 -- Supplier update an stock
 UPDATE stock 
