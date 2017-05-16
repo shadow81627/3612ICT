@@ -36,9 +36,9 @@ UPDATE item
 SET item_name = "pizza", item_description = "great original italian pasta", item_image = null 
 WHERE item_id = 1;
 
-/*-- Supplier delete item
+-- Supplier delete item
 DELETE FROM item 
-WHERE item_id = 1; */
+WHERE item_id = 1; 
 
 -- Supplier
 
@@ -85,9 +85,9 @@ UPDATE product
 SET product_price = 4.20, product_unit = "box"
 WHERE product_id = 1;
 
-/*-- Supplier delete product
+-- Supplier delete product
 DELETE FROM product
-WHERE product_id = 1;*/
+WHERE product_id = 1;
 
 -- Product Order
 
@@ -111,9 +111,9 @@ UPDATE product_order
 SET product_order_quantity = 4.2, product_order_unit = "grams", product_order_address = "22 Fake strret", product_order_date_due = null
 WHERE product_order_id = 1;
 
-/*-- Customer cancel order
+-- Customer cancel order
 DELETE FROM product_order 
-WHERE product_order_id = 1;*/
+WHERE product_order_id = 1;
 
 -- Inventory
 
@@ -151,9 +151,9 @@ UPDATE stock
 SET stock_quantity = 7, stock_unit = "grams"
 WHERE stock_id = 1;
 
-/*-- Supplier delete stock
+-- Supplier delete stock
 DELETE FROM stock 
-WHERE stock_id = 1; */
+WHERE stock_id = 1; 
 
 -- Recipe
 
@@ -170,9 +170,9 @@ UPDATE recipe
 SET recipe_quantity = 4, recipe_unit = "grams" 
 WHERE recipe_id = 1;
 
-/*-- Supplier delete recipe
+-- Supplier delete recipe
 DELETE FROM recipe 
-WHERE recipe_id = 1; */
+WHERE recipe_id = 1; 
 
 -- Process 
 
@@ -189,9 +189,9 @@ UPDATE process
 SET recipe_id = 1, process_precedence = 2, process_name = "Add pizza", process_description = "pour pizza onto your plate", process_image = null 
 WHERE process_id = 1;
 
-/*-- Supplier delete process
+-- Supplier delete process
 DELETE FROM process 
-WHERE process_id = 1; */
+WHERE process_id = 1; 
 
 -- Ingredient 
 
@@ -208,6 +208,6 @@ UPDATE ingredient
 SET ingredient_quantity = 4, ingredient_unit = "grams" 
 WHERE item_id = 1 AND process_id = 1;
 
-/*-- Supplier delete ingredient
+-- Supplier delete ingredient
 DELETE FROM ingredient 
-WHERE ingredient_id = 1; */
+WHERE ingredient_id = 1;
