@@ -115,8 +115,9 @@ CREATE TABLE recipe (
 DROP TABLE IF EXISTS process;
 -- Create Process table
 CREATE TABLE process (
-	recipe_id INT,
 	process_id  INT AUTO_INCREMENT,
+	recipe_id INT,
+	process_precedence INT,
 	process_name VARCHAR(32),
 	process_description VARCHAR(255),
 	PRIMARY KEY (process_id),
