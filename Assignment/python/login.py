@@ -1,13 +1,13 @@
 import os, os.path
 import random
-import sqlite3
 import string
 import time
+import MySQLdb
 
 import cherrypy
 
-DB_STRING = "my.db"
-
+db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
+con = db.cursor()
 
 class StringGenerator(object):
     @cherrypy.expose
