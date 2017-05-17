@@ -2,6 +2,11 @@ drop database pocketpasta;
 create database pocketpasta;
 use pocketpasta; 
 
+-- Add an email attribute to the user table
+ALTER TABLE mysql.user
+ADD email VARCHAR(255);
+SELECT * FROM mysql.user;
+
 -- Create Table Statements
 
 -- Drop Customer table
