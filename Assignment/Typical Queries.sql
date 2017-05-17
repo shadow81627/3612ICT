@@ -4,7 +4,7 @@
 
 -- Customer create 
 INSERT INTO customer 
-VALUES(null, "Ben", "ben@gmail.com", "21 Fake street");
+VALUES(1, "Ben", "ben@gmail.com", "21 Fake street");
 
 -- Customer views own details
 SELECT * 
