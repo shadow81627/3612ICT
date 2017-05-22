@@ -110,7 +110,7 @@ SELECT *
 FROM product_order
 WHERE customer_id = 1;
 
--- Supplier views thier orders and the customer contact detials for each order
+-- Supplier views thier orders and the customer contact details for each order
 SELECT * 
 FROM product_order, customer, product
 WHERE supplier_id = 1
@@ -118,7 +118,7 @@ AND product_order.customer_id = customer.customer_id;
 
 -- Customer update order 
 UPDATE product_order 
-SET product_order_quantity = 4.2, product_order_unit = "grams", product_order_address = "22 Fake strret", product_order_date_due = null
+SET product_order_quantity = 4.2, product_order_unit = "grams", product_order_address = "22 Fake street", product_order_date_due = null
 WHERE product_order_id = 1;
 
 -- Customer cancel order
@@ -141,9 +141,9 @@ UPDATE inventory
 SET inventory_name = "pantry", inventory_description = "The cupboard in the kitchen", inventory_address = "21 Fake street" 
 WHERE inventory_id = 1;
 
-/*-- Supplier delete inventory
+-- Supplier delete inventory
 DELETE FROM inventory 
-WHERE inventory_id = 1; */
+WHERE inventory_id = 1; 
 
 -- Stock
 
