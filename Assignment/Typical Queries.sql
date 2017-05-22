@@ -31,6 +31,16 @@ SELECT *
 FROM item 
 WHERE item_id = 1;
 
+-- View all Items with the name "pasta"
+SELECT *
+FROM item
+WHERE item_name = "pasta";
+
+-- View all Items with the catagory grain
+SELECT * 
+FROM item 
+WHERE item_category = "grain";
+
 -- Supplier Update an item
 UPDATE item 
 SET item_name = "pizza", item_description = "great original italian pasta", item_image = null 
