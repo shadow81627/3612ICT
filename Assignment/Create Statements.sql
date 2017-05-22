@@ -1,18 +1,13 @@
 drop database pocketpasta;
-create database pocketpasta;
+CREATE DATABASE IF NOT EXISTS pocketpasta;
 use pocketpasta; 
-
--- Add an email attribute to the user table
-ALTER TABLE mysql.user
-ADD email VARCHAR(255);
-SELECT * FROM mysql.user;
 
 -- Create Table Statements
 
 -- Drop Customer table
 DROP TABLE IF EXISTS customer;
 -- Create Customer table
-CREATE TABLE customer (
+CREATE TABLE IF NOT EXISTS customer (
 	customer_id INT AUTO_INCREMENT, 
 	customer_name VARCHAR(32), 
 	customer_email VARCHAR(255), 
@@ -23,7 +18,7 @@ CREATE TABLE customer (
 -- Drop supplier table
 DROP TABLE IF EXISTS supplier;
 -- Create Supplier table
-CREATE TABLE supplier (
+CREATE TABLE IF NOT EXISTS supplier (
 	supplier_id  INT AUTO_INCREMENT,
 	supplier_name  VARCHAR(32),
 	supplier_image BLOB,
@@ -34,18 +29,19 @@ CREATE TABLE supplier (
 -- Drop Item table
 DROP TABLE IF EXISTS item;
 -- Create Item table
-CREATE TABLE item (
+CREATE TABLE IF NOT EXISTS item (
 	item_id INT,
 	item_name  VARCHAR(32),
 	item_description  VARCHAR(255),
 	item_image BLOB,
+	item_category ENUM('fruit', 'vegetable', 'protein', 'dairy', 'grain', 'oil'),
 	PRIMARY KEY (item_id)
 );
 
 -- Drop product table
 DROP TABLE IF EXISTS product;
 -- Create Product table
-CREATE TABLE product (
+CREATE TABLE IF NOT EXISTS product (
 	product_id  INT AUTO_INCREMENT,
 	supplier_id INT,
 	item_id INT,
@@ -59,7 +55,7 @@ CREATE TABLE product (
 -- Drop product_order table
 DROP TABLE IF EXISTS product_order;
 -- Create Product_Order table
-CREATE TABLE product_order (
+CREATE TABLE IF NOT EXISTS product_order (
 	product_order_id INT,
 	product_id INT,
 	customer_id INT,
@@ -77,7 +73,7 @@ CREATE TABLE product_order (
 -- Drop inventory table
 DROP TABLE IF EXISTS inventory;
 -- Create Inventory Table
-CREATE TABLE inventory (
+CREATE TABLE IF NOT EXISTS inventory (
 	inventory_id INT AUTO_INCREMENT,
 	supplier_id INT,
 	inventory_name VARCHAR(32),
@@ -90,7 +86,7 @@ CREATE TABLE inventory (
 -- Drop stock table
 DROP TABLE IF EXISTS stock;
 -- Create Stock table
-CREATE TABLE stock (
+CREATE TABLE IF NOT EXISTS stock (
 	stock_id INT,
 	inventory_id INT,
 	item_id INT,
@@ -105,7 +101,7 @@ CREATE TABLE stock (
 -- Drop recipe table
 DROP TABLE IF EXISTS recipe;
 -- Create Recipe table
-CREATE TABLE recipe (
+CREATE TABLE IF NOT EXISTS recipe (
 	recipe_id  INT AUTO_INCREMENT,
 	item_id INT,
 	recipe_quantity FLOAT,
@@ -117,7 +113,7 @@ CREATE TABLE recipe (
 -- Drop process table
 DROP TABLE IF EXISTS process;
 -- Create Process table
-CREATE TABLE process (
+CREATE TABLE IF NOT EXISTS process (
 	process_id  INT AUTO_INCREMENT,
 	recipe_id INT,
 	process_precedence INT,
@@ -131,7 +127,7 @@ CREATE TABLE process (
 -- Drop ingredient table
 DROP TABLE IF EXISTS ingredient;
 -- Create Ingredient table
-CREATE TABLE ingredient (
+CREATE TABLE IF NOT EXISTS ingredient (
 	process_id INT,
 	item_id INT,
 	ingredient_quantity FLOAT,
@@ -140,3 +136,9 @@ CREATE TABLE ingredient (
 	FOREIGN KEY (process_id) REFERENCES process(process_id),
 	FOREIGN KEY (item_id) REFERENCES item(item_id)
 );
+
+-- Create an index on item name to speed up queries to search for items with a specific name
+CREATE INDEX item_name ON item (item_id, item_name);
+
+-- Create an index on item category to speed up searches for items of a specific category
+CREATE INDEX item_category ON item (item_id, item_category);
