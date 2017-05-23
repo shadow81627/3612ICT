@@ -23,55 +23,25 @@ class Supplier(object):
     def index(self, supplier_id = None):
         # Supplier list
         if supplier_id == None:
-            db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
-            con = db.cursor()
-            query = ("SELECT * FROM supplier;")
-            try:
-                # Get the data from the database by executing the query
-                con.execute(query)
-                result = ""
-                # Seperate all of the query results into columns
-                for row in con.fetchall():
-                    supplier_id = row[0]
-                    supplier_name = row[1]
-                    supplier_image = row[2]
-                    supplier_ABN = row[3]
-                    # Now print fetched result
-                    result += supplier_name + "<br>"
-                con.close()
-                db.close()
-                return result
-                
-            except:
-                con.close()
-                db.close()
-                return "Error: unable to fecth data"
+			data = DB.get_all_supplier()
+			result = ""
+			for row in data:
+				for attribute in row:
+					result += str(attribute) + " "
+				result += "<br>"
+			return result
+            #return "Error: unable to fecth data"
 
         # Supplier detail
         else:
-            db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
-            con = db.cursor()
-            query = ("SELECT * FROM supplier WHERE supplier_id = %s;")
-            try:
-                #Get the data from the database by executing the query with the given paramters
-                con.execute(query, (supplier_id))
-                result = ""
-                # Seperate all of the query results into columns
-                for row in con.fetchall():
-                    supplier_id = row[0]
-                    supplier_name = row[1]
-                    supplier_image = row[2]
-                    supplier_ABN = row[3]
-                    # Now print fetched result
-                    result += supplier_name + "<br>"
-                con.close()
-                db.close()
-                return result
-                
-            except:
-                con.close()
-                db.close()
-                return "Error: unable to fecth data"
+			data = DB.get_all_supplier_product(supplier_id)
+			result = ""
+			for row in data:
+				for attribute in row:
+					result += str(attribute) + " "
+				result += "<br>"
+			return result
+			#return "Error: unable to fecth data"
 
     @cherrypy.expose
     def product(self, supplier_id = None):
