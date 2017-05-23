@@ -34,7 +34,7 @@ class Supplier(object):
 
         # Supplier detail
         else:
-			data = DB.get_all_supplier_detail(supplier_id)
+			data = DB.get_supplier_detail(supplier_id)
 			result = ""
 			for row in data:
 				for attribute in row:
@@ -46,7 +46,7 @@ class Supplier(object):
     @cherrypy.expose
     def product(self, supplier_id = None):
         if supplier_id != None:
-			data = DB.get_all_supplier_product(supplier_id)
+			data = DB.get_supplier_product(supplier_id)
 			result = ""
 			for row in data:
 				for attribute in row:
