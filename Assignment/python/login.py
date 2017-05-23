@@ -9,10 +9,59 @@ import cherrypy
 db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
 con = db.cursor()
 
+class Login(object):
+
+		
+@cherrypy.expose
+class LoginWebService(object):
+	
+	@cherrypy.tools.accept(media='text/plain')
+	def GET(self):
+	
+	def POST(self, username, password):
+        with sqlite3.connect(DB_STRING) as c:
+            cherrypy.session['ts'] = time.time()
+            c.execute("INSERT INTO user_string VALUES (?, ?)",
+                      [cherrypy.session.id, some_string])
+        return some_string
+		
+		try:
+			db = mysql.connector.connect(user=username,
+										password=password,
+										database='pocketpasta')
+		except mysql.connector.Error as err:
+			if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+				print("Something is wrong with your user name or password")
+			elif err.errno == errorcode.ER_BAD_DB_ERROR:
+				print("Database does not exist")
+			else:
+				print(err)
+		else:
+			# you must create a Cursor object. It will let
+			# you execute all the queries you need
+			cur = db.cursor()
+
+			# Insert a new customer
+			cur.execute("INSERT INTO customer VALUES(null, 'Ben', 'ben@gmail.com', '21 Fake street');")
+
+			# Retrive the database customers
+			cur.execute("SELECT * FROM customer")
+
+			# print of all the rows 
+			for row in cur.fetchall():
+				print (row)
+			db.close()
+
+		
+
 class StringGenerator(object):
     @cherrypy.expose
     def index(self):
         return open('index.html')
+		
+	@cherrypy.expose
+	def login(self):
+		return open('login.html')
 
 
 @cherrypy.expose
