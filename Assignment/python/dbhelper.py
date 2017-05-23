@@ -43,7 +43,7 @@ class DBHelper:
 	def get_all_product(self):
 		connection = self.connect()
 		try:
-			query = "SELECT * FROM supplier;"
+			query = "SELECT * FROM product;"
 			with connection.cursor() as cursor:
 				cursor.execute(query)
 			return cursor.fetchall()

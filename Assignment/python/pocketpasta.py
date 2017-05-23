@@ -59,29 +59,17 @@ class Supplier(object):
 class Product(object):
     @cherrypy.expose
     def index(self, supplier_id = None, product_id = None):
-        if product_id == None:
-            db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
-            con = db.cursor()
-            query = ("SELECT * FROM product;")
-            try:
-                # Get the data from the database by executing the query
-                con.execute(query)
-                result = ""
-                # Seperate all of the query results into columns
-                for row in con.fetchall():
-                    for attribute in row:
-                        result += str(attribute) + " "
-                    result += "<br>"
-                con.close()
-                db.close()
-                return result
-                
-            except:
-                con.close()
-                db.close()
-                return "Error: unable to fecth data for products"
-        else:
-            return 'Product id %s' %(product_id)
+		if product_id == None:
+			data = DB.get_all_product()
+			result = ""
+			for row in data:
+				for attribute in row:
+					result += str(attribute) + " "
+				result += "<br>"
+			return result
+			#return "Error: unable to fecth data"
+		else:
+			return 'Product id %s' %(product_id)
     
 if __name__ == '__main__':
     cherrypy.tree.mount(Login(), '/')
