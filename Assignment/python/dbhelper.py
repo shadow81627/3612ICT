@@ -17,8 +17,8 @@ class DBHelper:
 		finally:
 			connection.close()
 		  
-	# Get all of a particular suppliers products
-	def get_all_supplier_product(self, supplier_id):
+	# Get all of a particular suppliers details
+	def get_all_supplier_detail(self, supplier_id):
 		connection = self.connect()
 		try:
 			query = "SELECT * FROM supplier WHERE supplier_id = %s;"
@@ -27,4 +27,16 @@ class DBHelper:
 			return cursor.fetchall()
 		finally:
 			connection.close()
+			
+	# Get all of a particular suppliers products
+	def get_all_supplier_product(self, supplier_id):
+		connection = self.connect()
+		try:
+			query = "SELECT * FROM product WHERE supplier_id = %s;"
+			with connection.cursor() as cursor:
+				cursor.execute(query, supplier_id)
+			return cursor.fetchall()
+		finally:
+			connection.close()
+			
 	

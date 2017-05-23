@@ -34,7 +34,7 @@ class Supplier(object):
 
         # Supplier detail
         else:
-			data = DB.get_all_supplier_product(supplier_id)
+			data = DB.get_all_supplier_detail(supplier_id)
 			result = ""
 			for row in data:
 				for attribute in row:
@@ -46,25 +46,14 @@ class Supplier(object):
     @cherrypy.expose
     def product(self, supplier_id = None):
         if supplier_id != None:
-            db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="pocketpasta")
-            con = db.cursor()
-            query = ("SELECT * FROM product WHERE supplier_id = %s;")
-            try:
-                # Get the data from the database by executing the query
-                con.execute(query, (supplier_id))
-                result = ""
-                # Seperate all of the query results into columns
-                for row in con.fetchall():
-                    for attribute in row:
-                        result += str(attribute) + "<br>"
-                con.close()
-                db.close()
-                return result
-                
-            except:
-                con.close()
-                db.close()
-                return "Error: unable to fecth data for supplier product"
+			data = DB.get_all_supplier_product(supplier_id)
+			result = ""
+			for row in data:
+				for attribute in row:
+					result += str(attribute) + " "
+				result += "<br>"
+			return result
+			#return "Error: unable to fecth data"
 
 @cherrypy.popargs('product_id')
 class Product(object):
