@@ -81,5 +81,16 @@ class DBHelper:
 			return cursor.fetchall()
 		finally:
 			connection.close()
+			
+	# Transfer stock
+	def transfer_stock(self, stock_id, amount):
+		connection = self.connect()
+		try:
+			query = "CALL transfer_stock(%s, %s);"
+			with connection.cursor() as cursor:
+				cursor.execute(query, (stock_id, amount))
+			return cursor.fetchall()
+		finally:
+			connection.close()
 	
 	
