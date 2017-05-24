@@ -63,7 +63,7 @@ class DBHelper:
 	def get_supplier_product(self, supplier_id):
 		connection = self.connect()
 		try:
-			query = "SELECT * FROM supplier_%s_items;"
+			query = "SELECT * FROM supplier_items WHERE supplier_id = %s;"
 			
 			with connection.cursor() as cursor:
 				cursor.execute(query, supplier_id)
