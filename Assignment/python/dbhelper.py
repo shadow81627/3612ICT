@@ -37,6 +37,17 @@ class DBHelper:
 		result += "</table>"
 		return result
 	
+	# Create a new Supplier
+	def insert_supplier(self, supplier_id = None, supplier_name, supplier_image = None, supplier_ABN):
+		connection = self.connect()
+		try:
+			query = "INSERT INTO supplier VALUES(s%, s%, s%, s%);"
+			with connection.cursor() as cursor:
+				cursor.execute(query, (supplier_id, supplier_name, supplier_image, supplier_ABN))
+			return cursor.fetchall()
+		finally:
+			connection.close()
+			
 	# Get all of the suppliers
 	def get_all_supplier(self):
 		connection = self.connect()
@@ -93,4 +104,13 @@ class DBHelper:
 		finally:
 			connection.close()
 	
-	
+	# Create a new product order
+	def insert_product_order(self, product_order_id, product_id, customer_id, quantity, unit, address, due_date = None, date_created = None, date_delivered = None):
+		connection = self.connect()
+		try:
+			query = "INSERT INTO product_order VALUES( s%, s%, s%, s%, s%, s%, s%, s%, s%);"
+			with connection.cursor() as cursor:
+				cursor.execute(query, (product_order_id, product_id, customer_id, quantity, unit, address, due_date, date_created, date_delivered))
+			return cursor.fetchall()
+		finally:
+			connection.close()
