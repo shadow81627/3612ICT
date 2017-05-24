@@ -7,13 +7,38 @@ DROP PROCEDURE IF EXISTS transfer_stock;
 -- Using the given amount the procedure will add or remove that amount from the stock.
 CREATE PROCEDURE transfer_stock(IN stock INT, IN amount FLOAT)
 BEGIN
+	DECLARE stock_quantity_found INT;
 	START TRANSACTION;
 	SELECT stock_quantity INTO stock_quantity_found FROM stock WHERE stock_id = stock;
 	UPDATE stock SET stock_quantity = stock_quantity_found + amount WHERE stock_id = stock;
 	COMMIT;
-END
+END$
 
+-- Call the transfer stock procedure
+SELECT * FROM stock;
+CALL transfer_stock(1, 1);
+SELECT * FROM stock;
 
+-- Drop the trigger if it already exists
+DROP TRIGGER IF EXISTS check_date;
+-- Creates a trigger to check that delivery date is not before current date.
+CREATE TRIGGER check_date BEFORE INSERT ON product_order
+FOR EACH ROW 
+BEGIN
+    DECLARE MESSAGE varchar(128);
+    IF(NEW.product_order_date_due < NOW()) then
+        SET MESSAGE = "Can not select  delivery date from the past.";
+        signal sqlstate '42069' set message_text = MESSAGE;
+    END IF;
+END$
+DELIMITER ;
+
+-- Insert Product ORDER invalid date
+INSERT INTO product_order 
+VALUES( 1, 1, 1, 3, "kg", "21 Fake street", '2016-01-01', null, null);
+-- Valid date
+INSERT INTO product_order 
+VALUES( null, 1, 1, 3, "kg", "21 Fake street", null, null, null);
 
 -- Drop the procedure if it already exists
 DROP PROCEDURE IF EXISTS delivery_date;
