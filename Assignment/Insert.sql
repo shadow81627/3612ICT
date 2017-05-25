@@ -6,17 +6,17 @@ INSERT INTO supplier
 VALUES(2, "woolies", null, 12345);
 
 INSERT INTO supplier 
-VALUES(3, "aldi", null, 12346);
+VALUES(3, "aldi", null, 51824753556);
 
 -- Insert Items
 INSERT INTO item 
-VALUES(1, "pasta", "great original italian pasta", null);
+VALUES(1, "pasta", "great original italian pasta", null, 'grain');
 
 INSERT INTO item 
-VALUES(2, "pizza", "great original italian pizza", null);
+VALUES(2, "pizza", "great original italian pizza", null,'fruit');
 
 INSERT INTO item 
-VALUES(3, "cheese", "delicous parmasain cheese", null);
+VALUES(3, "cheese", "delicous parmasain cheese", null,'dairy');
 
 -- Insert Products
 INSERT INTO product 
