@@ -43,10 +43,10 @@ INSERT INTO product_order
 VALUES( 1, 1, 1, 3.20, "kg", "21 Fake street", null, null, null);
 
 INSERT INTO product_order 
-VALUES( 1, 2, 2, 5.7, "kg", "22 Fake street", null, null, null);
+VALUES( 2, 2, 2, 5.7, "kg", "22 Fake street", null, null, null);
 
 INSERT INTO product_order 
-VALUES( 1, 3, 3, 20.5, "kg", "23 Fake street", null, null, null);
+VALUES( 3, 3, 3, 20.5, "kg", "23 Fake street", null, null, null);
 
 -- Insert inventory
 INSERT INTO inventory 
