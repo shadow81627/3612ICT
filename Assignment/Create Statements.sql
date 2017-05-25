@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS supplier (
 	supplier_id  INT AUTO_INCREMENT,
 	supplier_name  VARCHAR(32),
 	supplier_image BLOB,
-	supplier_ABN INT,
+	supplier_ABN BIGINT,
 	PRIMARY KEY (supplier_id)
 );
 
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS product (
 	product_price FLOAT,
 	product_unit ENUM('kg', 'box', 'grams'),	
 	PRIMARY KEY (product_id),
-	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
-	FOREIGN KEY (item_id) REFERENCES item(item_id)
+	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id) ON DELETE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE CASCADE
 );
 
 -- Drop product_order table
@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS product_order (
 	product_order_date_created TIMESTAMP NOT NULL DEFAULT NOW(),
 	product_order_date_delivered DATETIME,
 	PRIMARY KEY (product_order_id),
-	FOREIGN KEY (product_id) REFERENCES product(product_id),
-	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+	FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE,
+	FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 -- Drop inventory table
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 	inventory_description VARCHAR(255),
 	inventory_address VARCHAR(255),
 	PRIMARY KEY (inventory_id),
-	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
+	FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id) ON DELETE CASCADE
 );
 
 -- Drop stock table
@@ -94,8 +94,8 @@ CREATE TABLE IF NOT EXISTS stock (
 	stock_unit ENUM('kg', 'box', 'grams'),
 	stock_created TIMESTAMP NOT NULL DEFAULT NOW(),
 	PRIMARY KEY (stock_id),
-	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id),
-	FOREIGN KEY (item_id) REFERENCES item(item_id)
+	FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id) ON DELETE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE CASCADE
 );
 
 -- Drop recipe table
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS recipe (
 	recipe_quantity FLOAT,
 	recipe_unit ENUM('kg', 'box', 'grams'),
 	PRIMARY KEY (recipe_id),
-	FOREIGN KEY (item_id) REFERENCES item(item_id)
+	FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE CASCADE
 );
 
 -- Drop process table
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS process (
 	process_description VARCHAR(255),
 	process_image BLOB,
 	PRIMARY KEY (process_id),
-	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id)
+	FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON DELETE CASCADE
 );
 
 -- Drop ingredient table
@@ -133,8 +133,8 @@ CREATE TABLE IF NOT EXISTS ingredient (
 	ingredient_quantity FLOAT,
 	ingredient_unit ENUM('kg', 'box', 'grams'),
 	PRIMARY KEY (process_id, item_id),
-	FOREIGN KEY (process_id) REFERENCES process(process_id),
-	FOREIGN KEY (item_id) REFERENCES item(item_id)
+	FOREIGN KEY (process_id) REFERENCES process(process_id) ON DELETE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE CASCADE
 );
 
 -- Create an index on item name to speed up queries to search for items with a specific name
