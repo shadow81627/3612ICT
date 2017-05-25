@@ -61,7 +61,12 @@ class Supplier(object):
 			return result
 			#return "Error: unable to fecth data"
 			
-
+	@cherrypy.expose
+	def delete(self, supplier_id):
+		insert = DB.delete_supplier(supplier_id)
+		header = DB.table_header('supplier')
+		data = DB.get_all_supplier()
+		return DB.print_table(header, data)
 		
 
 @cherrypy.popargs('product_id')
@@ -80,11 +85,37 @@ class Product(object):
 		else:
 			return 'Product id %s' %(product_id)
 			
+class Create(object):
+	@cherrypy.expose
+	def index(self):
+		return 'select a object to create'
+	
+	@cherrypy.expose
+	def supplier(self, supplier_id = None, supplier_name = None, supplier_image = None, supplier_ABN = None):
+		insert = DB.insert_supplier(supplier_id, supplier_name, supplier_image, supplier_ABN)
+		header = DB.table_header('supplier')
+		data = DB.get_all_supplier()
+		return DB.print_table(header, data)
+		
+class Delete(object):
+	@cherrypy.expose
+	def index(self):
+		return 'select a object to delete'
+			
+	@cherrypy.expose
+	def supplier(self, supplier_id):
+		insert = DB.delete_supplier(supplier_id)
+		header = DB.table_header('supplier')
+		data = DB.get_all_supplier()
+		return DB.print_table(header, data)
+			
 if __name__ == '__main__':
 
 	cherrypy.tree.mount(Login(), '/')
 	cherrypy.tree.mount(Supplier(), '/supplier')
 	cherrypy.tree.mount(Product(), '/product')
+	cherrypy.tree.mount(Create(), '/create') 
+	cherrypy.tree.mount(Delete(), '/delete')
 
 	cherrypy.engine.start()
 	cherrypy.engine.block()
