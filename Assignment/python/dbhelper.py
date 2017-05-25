@@ -38,12 +38,35 @@ class DBHelper:
 		return result
 	
 	# Create a new Supplier
-	def insert_supplier(self, supplier_id = None, supplier_name, supplier_image = None, supplier_ABN):
+	def insert_supplier(self, supplier_id = None, supplier_name = None, supplier_image = None, supplier_ABN = None):
 		connection = self.connect()
 		try:
-			query = "INSERT INTO supplier VALUES(s%, s%, s%, s%);"
+			query = "INSERT INTO supplier VALUES(%s, %s, %s, %s);"
 			with connection.cursor() as cursor:
-				cursor.execute(query, (supplier_id, supplier_name, supplier_image, supplier_ABN))
+				try:
+					cursor.execute(query, (supplier_id, supplier_name, supplier_image, supplier_ABN))
+					# Commit changes in the database
+					connection.commit()
+				except:
+				   # Rollback in case there is any error
+				   connection.rollback()
+			return cursor.fetchall()
+		finally:
+			connection.close()
+			
+	# Delete a new Supplier
+	def delete_supplier(self, supplier_id):
+		connection = self.connect()
+		try:
+			query = "DELETE FROM supplier WHERE supplier_id = %s;"
+			with connection.cursor() as cursor:
+				try:
+					cursor.execute(query, supplier_id)
+					# Commit changes in the database
+					connection.commit()
+				except:
+				   # Rollback in case there is any error
+				   connection.rollback()
 			return cursor.fetchall()
 		finally:
 			connection.close()
@@ -105,7 +128,7 @@ class DBHelper:
 			connection.close()
 	
 	# Create a new product order
-	def insert_product_order(self, product_order_id, product_id, customer_id, quantity, unit, address, due_date = None, date_created = None, date_delivered = None):
+	def insert_product_order(self, product_order_id = None, product_id = None, customer_id = None, quantity = None, unit = None, address = None, due_date = None, date_created = None, date_delivered = None):
 		connection = self.connect()
 		try:
 			query = "INSERT INTO product_order VALUES( s%, s%, s%, s%, s%, s%, s%, s%, s%);"
