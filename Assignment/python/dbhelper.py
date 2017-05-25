@@ -131,9 +131,27 @@ class DBHelper:
 	def insert_product_order(self, product_order_id = None, product_id = None, customer_id = None, quantity = None, unit = None, address = None, due_date = None, date_created = None, date_delivered = None):
 		connection = self.connect()
 		try:
-			query = "INSERT INTO product_order VALUES( s%, s%, s%, s%, s%, s%, s%, s%, s%);"
+			query = "INSERT INTO product_order VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s);"
 			with connection.cursor() as cursor:
-				cursor.execute(query, (product_order_id, product_id, customer_id, quantity, unit, address, due_date, date_created, date_delivered))
+				try:
+					cursor.execute(query, (product_order_id, product_id, customer_id, quantity, unit, address, due_date, date_created, date_delivered))
+					# Commit changes in the database
+					connection.commit()
+				except:
+				   # Rollback in case there is any error
+				   connection.rollback()
+			return cursor.fetchall()
+		finally:
+			connection.close()
+			
+	# Retrive all of the orders
+	def get_all_product_order(self):
+		connection = self.connect()
+		try:
+			query = "SELECT * FROM product_order;"
+			
+			with connection.cursor() as cursor:
+				cursor.execute(query)
 			return cursor.fetchall()
 		finally:
 			connection.close()
